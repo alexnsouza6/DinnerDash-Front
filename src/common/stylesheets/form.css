@@ -2,14 +2,47 @@
   height: 100vh;
 }
 
+.d-half-height {
+  height: 50vh;
+}
+
 .d-full-width {
   width: 100%;
+}
+
+.d-full-threequarter-width {
+  width: 75%;
+}
+
+.d-onequarter-width {
+  width: 25%;
 }
 
 .d-align-center {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.d-left-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 5%;
+}
+
+.d-top-image {
+  background-image: url("../images/restaurant.jpeg");
+  opacity: 0.75;
+}
+
+.d-bottom-form {
+  padding: 1%;
+}
+
+.t-color-white {
+  color: white;
 }
 
 .divisor {
