@@ -5,6 +5,7 @@ import {
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { authUser } from '../actions/session/sessionActions';
+import { signUpUser } from '../actions/user/userActions';
 
 import '../common/stylesheets/form.css';
 
@@ -20,6 +21,10 @@ class LoginForm extends Component {
 
   handleAuthSubmit = userInfo => {
     this.props.authUser(userInfo);
+  };
+
+  handleSignUpSubmit = userInfo => {
+    this.props.signUpUser(userInfo);
   };
 
   render() {
@@ -75,53 +80,64 @@ class LoginForm extends Component {
               </div>
             ) : (
               <div>
-                <Form className="d-full-width">
+                <Form className="d-full-width" onSubmit={handleSubmit(this.handleSignUpSubmit)}>
                   <FormGroup>
-                    <Label for="exampleEmail">Name</Label>
+                    <Label for="email">Name</Label>
                     <br />
                     <Field
                       className="d-full-width"
                       type="text"
-                      name="userName"
+                      name="name"
                       component="input"
                       placeholder="name"
                     />
                   </FormGroup>
                   <FormGroup>
-                    <Label for="examplePassword">Email</Label>
+                    <Label for="username">Username</Label>
+                    <br />
+                    <Field
+                      className="d-full-width"
+                      type="text"
+                      name="username"
+                      component="input"
+                      placeholder="username"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="password">Email</Label>
                     <br />
                     <Field
                       className="d-full-width"
                       type="email"
-                      name="userEmail"
+                      name="email"
                       component="input"
                       placeholder="email"
                     />
                   </FormGroup>
                   <FormGroup>
-                    <Label for="examplePassword">Password</Label>
+                    <Label for="password">Password</Label>
                     <br />
                     <Field
                       className="d-full-width"
                       type="password"
-                      name="userPassword"
+                      name="password"
                       component="input"
                       placeholder="password"
                     />
                   </FormGroup>
                   <FormGroup>
-                    <Label for="examplePassword">Password Confirmation</Label>
+                    <Label for="password_confirmation">Password Confirmation</Label>
                     <br />
                     <Field
                       className="d-full-width"
                       type="password"
-                      name="userPasswordConfirmation"
+                      name="password_confirmation"
                       component="input"
                       placeholder="password confirmation"
                     />
                   </FormGroup>
                   <Button color="success" className="d-full-width">
-                    Sign in
+                    Sign up
                   </Button>
                 </Form>
                 <hr />
@@ -150,6 +166,6 @@ export default reduxForm({
 })(
   connect(
     null,
-    { authUser },
+    { authUser, signUpUser },
   )(LoginForm),
 );
