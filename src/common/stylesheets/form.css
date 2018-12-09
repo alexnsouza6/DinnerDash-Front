@@ -1,0 +1,18 @@
+.d-full-height {
+  height: 100vh;
+}
+
+.d-full-width {
+  width: 100%;
+}
+
+.d-align-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.divisor {
+  color: "gray";
+  border: 1px;
+}
