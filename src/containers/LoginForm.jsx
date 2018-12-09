@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import {
-  Container, Input, FormGroup, Label, Button, Form,
+  Container, FormGroup, Label, Button, Form,
 } from 'reactstrap';
+import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { authUser } from '../actions/session/sessionActions';
+
 import '../common/stylesheets/form.css';
 
 class LoginForm extends Component {
@@ -14,8 +18,13 @@ class LoginForm extends Component {
     });
   };
 
+  handleAuthSubmit = userInfo => {
+    this.props.authUser(userInfo);
+  };
+
   render() {
     const { login } = this.state;
+    const { handleSubmit } = this.props;
     return (
       <div>
         <Container className="d-full-height d-align-center">
@@ -23,20 +32,27 @@ class LoginForm extends Component {
             <h1 align="center"> DinnerDash </h1>
             {login ? (
               <div>
-                <Form className="d-full-width">
+                <Form onSubmit={handleSubmit(this.handleAuthSubmit)} className="d-full-width">
                   <FormGroup>
                     <Label for="exampleEmail">Email</Label>
                     <br />
-                    <Input type="email" name="email" id="exampleEmail" placeholder="with a " />
+                    <Field
+                      className="d-full-width"
+                      type="email"
+                      name="email"
+                      component="input"
+                      placeholder="email"
+                    />
                   </FormGroup>
                   <FormGroup>
                     <Label for="examplePassword">Password</Label>
                     <br />
-                    <Input
+                    <Field
+                      className="d-full-width"
                       type="password"
                       name="password"
-                      id="examplePassword"
-                      placeholder="password "
+                      component="input"
+                      placeholder="password"
                     />
                   </FormGroup>
                   <Button color="success" className="d-full-width">
@@ -63,31 +79,45 @@ class LoginForm extends Component {
                   <FormGroup>
                     <Label for="exampleEmail">Name</Label>
                     <br />
-                    <Input type="Name" name="Name" id="exampleName" placeholder="with a " />
+                    <Field
+                      className="d-full-width"
+                      type="text"
+                      name="userName"
+                      component="input"
+                      placeholder="name"
+                    />
                   </FormGroup>
                   <FormGroup>
                     <Label for="examplePassword">Email</Label>
                     <br />
-                    <Input type="Email" name="Email" id="exampleEmail" placeholder="Email " />
+                    <Field
+                      className="d-full-width"
+                      type="email"
+                      name="userEmail"
+                      component="input"
+                      placeholder="email"
+                    />
                   </FormGroup>
                   <FormGroup>
                     <Label for="examplePassword">Password</Label>
                     <br />
-                    <Input
-                      type="Password"
-                      name="Password"
-                      id="examplePassword"
-                      placeholder="Password "
+                    <Field
+                      className="d-full-width"
+                      type="password"
+                      name="userPassword"
+                      component="input"
+                      placeholder="password"
                     />
                   </FormGroup>
                   <FormGroup>
-                    <Label for="examplePassword">Passowrd Confirmation</Label>
+                    <Label for="examplePassword">Password Confirmation</Label>
                     <br />
-                    <Input
-                      type="PasswordConfirmation"
-                      name="PasswordConfirmation"
-                      id="examplePasswordConfirmation"
-                      placeholder="Password Confirmation "
+                    <Field
+                      className="d-full-width"
+                      type="password"
+                      name="userPasswordConfirmation"
+                      component="input"
+                      placeholder="password confirmation"
                     />
                   </FormGroup>
                   <Button color="success" className="d-full-width">
@@ -96,14 +126,14 @@ class LoginForm extends Component {
                 </Form>
                 <hr />
                 <div className="padding">
-                  <h4> Don't have a account, yet?</h4>
+                  <h4> Already have an account?</h4>
                   <Button
                     outline
                     color="success"
                     className="d-full-width"
                     onClick={() => this.handleFormChange()}
                   >
-                    Sign up
+                    Sign in
                   </Button>
                 </div>
               </div>
@@ -115,4 +145,11 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default reduxForm({
+  form: 'LoginForm',
+})(
+  connect(
+    null,
+    { authUser },
+  )(LoginForm),
+);
