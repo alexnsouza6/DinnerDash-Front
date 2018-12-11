@@ -1,25 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Router, Switch } from 'react-router-dom';
 import reduxPromise from 'redux-promise';
 import thunk from 'redux-thunk';
-import { BrowserRouter, Switch } from 'react-router-dom';
+
+import createHistory from 'history/createBrowserHistory';
 import reducers from './reducers/index';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './common/stylesheets/index.css';
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 
-const store = createStore(reducers, {}, applyMiddleware(reduxPromise, thunk));
+export const history = createHistory();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, {}, composeEnhancers(applyMiddleware(reduxPromise, thunk)));
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>
         <App />
       </Switch>
-    </BrowserRouter>
+    </Router>
   </Provider>,
   document.getElementById('root'),
 );
