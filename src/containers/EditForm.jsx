@@ -3,18 +3,26 @@ import {
   Container, FormGroup, Label, Button, Form, Row, Col,
 } from 'reactstrap';
 import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { editUser } from '../actions/user/userActions';
 import '../common/stylesheets/form.css';
 
 class EditForm extends Component {
+  handleEditForm = userInfo => {
+    const { id } = this.props.match.params;
+    this.props.editUser(userInfo, id);
+  };
+
   render() {
+    const { handleSubmit } = this.props;
     return (
-      <Container fluid>
+      <Container fluid className="c-background">
         <Row className="d-top-image d-half-height d-left-bottom">
           <h1 className="t-color-white"> Your Profile </h1>
           <br />
           <h4 className="t-color-white"> Edit your personal info and password </h4>
         </Row>
-        <Form className="d-bottom-form">
+        <Form className="f-style-form" onSubmit={handleSubmit(this.handleEditForm)}>
           <Row>
             <Col>
               <FormGroup>
@@ -66,7 +74,7 @@ class EditForm extends Component {
             </Col>
           </Row>
           <Button color="success" className="d-onequarter-width">
-            Update my infos
+            Update my infos.
           </Button>
         </Form>
       </Container>
@@ -74,6 +82,15 @@ class EditForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  login: state.login,
+});
+
 export default reduxForm({
   form: 'EditForm',
-})(EditForm);
+})(
+  connect(
+    mapStateToProps,
+    { editUser },
+  )(EditForm),
+);
