@@ -33,11 +33,11 @@
 }
 
 .d-top-image {
-  background-image: url("../images/restaurant.jpeg");
+  background-image: url("../images/restaurant.png");
   opacity: 0.75;
 }
 
-.d-bottom-form {
+.f-style-form {
   padding: 1%;
 }
 
@@ -48,4 +48,8 @@
 .divisor {
   color: "gray";
   border: 1px;
+}
+
+.c-background {
+  background: rgba(230, 228, 228, 0.739);
 }
