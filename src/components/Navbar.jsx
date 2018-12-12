@@ -4,8 +4,6 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/session/sessionActions';
-import '../common/stylesheets/navbar.css';
-import '../common/stylesheets/footer.css';
 
 class MainNavBar extends Component {
   state = { isOpen: false };
@@ -23,15 +21,23 @@ class MainNavBar extends Component {
     return (
       <Fragment>
         <Navbar className="navbar fixed-top navbar-light bg-faded" expand="md">
-          <NavbarBrand href="/">DinnerDash</NavbarBrand>
+          <NavbarBrand href="/" style={{ color: 'white' }}>
+            DinnerDash
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/profile/edit">Profile</NavLink>
+                <NavLink href="/profile/edit" style={{ color: 'white' }}>
+                  Profile
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink onClick={() => this.handleLogout()} style={{ cursor: 'pointer' }}>
+                <NavLink
+                  onClick={() => this.handleLogout()}
+                  style={{ cursor: 'pointer', color: 'white' }}
+                  className="navbar-style"
+                >
                   Logout
                 </NavLink>
               </NavItem>
