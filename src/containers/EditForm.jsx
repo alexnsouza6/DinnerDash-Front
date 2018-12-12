@@ -37,10 +37,10 @@ class EditForm extends Component {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="password">Username</Label>
+                <Label for="password">New Password</Label>
                 <br />
                 <Field
-                  type="text"
+                  type="password"
                   name="password"
                   className="d-full-threequarter-width"
                   component="input"
@@ -50,7 +50,7 @@ class EditForm extends Component {
             </Col>
             <Col>
               <FormGroup>
-                <Label for="password">Email</Label>
+                <Label for="email">Email</Label>
                 <br />
                 <Field
                   type="email"
@@ -61,7 +61,7 @@ class EditForm extends Component {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="password">Password Confirmation</Label>
+                <Label for="password_confirmation">New Password Confirmation</Label>
                 <br />
                 <Field
                   type="password"

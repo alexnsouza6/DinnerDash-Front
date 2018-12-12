@@ -21,10 +21,21 @@ export const editUser = (userInfo, userId) => dispatch => {
   axios({
     method: 'patch',
     url: `${URL}/users/${userId}`,
-    data: userInfo,
+    data: {
+      user: {
+        name: userInfo.name,
+        email: userInfo.email,
+        password: userInfo.password,
+        password_confirmation: userInfo.password_confirmation,
+      },
+    },
     headers: { contentType: 'application/json', authorization: `Bearer ${userToken}` },
-  }).then(response => {
-    dispatch({ payload: response.data, type: USER_EDITED });
-    toastr.success('User Info Updated');
-  });
+  })
+    .then(response => {
+      dispatch({ payload: response.data, type: USER_EDITED });
+      toastr.success('User Info Updated');
+    })
+    .catch(error => {
+      if (error.response && error.response.data) toastr.error(error.response.data.errors);
+    });
 };
