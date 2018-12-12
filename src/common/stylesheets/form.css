@@ -34,7 +34,6 @@
 
 .d-top-image {
   background-image: url("../images/restaurant.png");
-  opacity: 0.75;
 }
 
 .f-style-form {
@@ -52,4 +51,5 @@
 
 .c-background {
   background: rgba(230, 228, 228, 0.739);
+  min-height: 100vh;
 }
