@@ -5,6 +5,7 @@ const initialState = {};
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case USER_CREATE:
+      localStorage.setItem('userToken', JSON.stringify(payload.token));
       return { ...state, user: { payload }, loggedIn: true };
     case USER_EDITED:
       return { ...state, user: { payload }, loggedIn: true };

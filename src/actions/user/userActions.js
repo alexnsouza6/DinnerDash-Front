@@ -1,19 +1,31 @@
 import axios from 'axios';
 import { toastr } from 'react-redux-toastr';
 import { URL, USER_CREATE, USER_EDITED } from '../consts';
+import { history } from '../../index';
 
 export const signUpUser = userInfo => dispatch => {
   axios({
     method: 'post',
     url: `${URL}/users`,
-    data: userInfo,
+    data: {
+      user: {
+        name: userInfo.name,
+        username: userInfo.username,
+        email: userInfo.email,
+        password: userInfo.password,
+        password_confirmation: userInfo.password_confirmation,
+      },
+    },
     headers: { contentType: 'application/json' },
   })
     .then(response => {
       dispatch({ payload: response.data, type: USER_CREATE });
       toastr.success('Welcome to DinnerDash', 'Enjoy your Meal!');
+      history.push(`/profile/edit/${response.data.id}`);
     })
-    .catch(error => console.log(error.response.data.message));
+    .catch(error => {
+      if (error.response && error.response.data) toastr.error(error.response.data.errors);
+    });
 };
 
 export const editUser = (userInfo, userId) => dispatch => {

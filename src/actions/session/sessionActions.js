@@ -13,7 +13,6 @@ export const authUser = userInfo => dispatch => {
     .then(response => {
       toastr.success('Welcome to DinnerDash', 'Enjoy your Meal!');
       dispatch({ payload: response.data, type: USER_LOGIN });
-      console.log(response.data);
       history.push(`/profile/edit/${response.data.id}`);
     })
     .catch(error => {
