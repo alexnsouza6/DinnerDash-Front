@@ -5,7 +5,7 @@ import {
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/session/sessionActions';
 
-class MainNavBar extends Component {
+export class MainNavBar extends Component {
   state = { isOpen: false };
 
   toggle = () => {
@@ -37,6 +37,7 @@ class MainNavBar extends Component {
                   onClick={() => this.handleLogout()}
                   style={{ cursor: 'pointer', color: 'white' }}
                   className="navbar-style"
+                  id="n-logout-link"
                 >
                   Logout
                 </NavLink>
